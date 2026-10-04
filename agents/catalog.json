@@ -1,0 +1,52 @@
+{
+  "catalog_version": "1.0.0",
+  "generated": "2026-10-04",
+  "business": {
+    "name": "Digital Footprint Reports (assumed — owner to confirm)",
+    "product": "Customer-facing public-profile discovery reports built on social-analyzer",
+    "source_of_truth": "https://github.com/advantageosmain-sudo/social-analyzer (fork of qeeqbox/social-analyzer; 0 ahead / 0 behind at catalog creation)",
+    "architecture_rule": "Upstream files are never modified by skills or agents. All fork-owned material lives under agents/. The fork must stay mergeable with upstream."
+  },
+  "existing_capabilities": [
+    {"id": "fast-scan", "source": "modules/fast-scan.js (find_username_normal)", "what": "HTTP-based username detection across data/sites.json (999 sites) with 0–100 rate", "reused_by": ["footprint-report-producer", "product-readiness-check"]},
+    {"id": "slow-scan", "source": "modules/slow-scan.js (find_username_advanced)", "what": "Selenium/Firefox rendering + screenshots", "status_here": "unavailable — firefox & geckodriver binary missing (flagged by readiness check)"},
+    {"id": "special-scan", "source": "modules/special-scan.js", "what": "Facebook / Gmail / Google special detections"},
+    {"id": "string-analysis", "source": "modules/string-analysis.js", "what": "permutations, symbols, numbers, common words, age guess"},
+    {"id": "name-analysis", "source": "modules/name-analysis.js", "what": "name origins / similarity"},
+    {"id": "extraction", "source": "modules/extraction.js", "what": "patterns & metadata extraction (--extract, --metadata)"},
+    {"id": "external-apis", "source": "modules/external-apis.js", "what": "Google / DuckDuckGo search lookups (API key = spending gate)"},
+    {"id": "stats", "source": "modules/stats.js", "what": "profile statistics by category/country"},
+    {"id": "visualize", "source": "modules/visualize.js + public/graph.html", "what": "force-directed metadata graph"},
+    {"id": "web-gui", "source": "app.js --gui, public/app.html", "what": "Express GUI on :9005 (/get_settings, /generate, /analyze_string, …)"},
+    {"id": "python-cli", "source": "app.py", "what": "Python variant of the CLI (help verified; not used by skills)"},
+    {"id": "docker-grid", "source": "docker-compose.yml", "what": "Selenium hub + firefox node for slow scans (infra = spending gate)"},
+    {"id": "upstream-ci", "source": ".github/workflows/main.yml", "what": "qeeqbox auto-checking.sh auto-commit on push — upstream tooling, NOT an owner gate"}
+  ],
+  "gaps_identified": [
+    "No readiness verification — product silently failed all scans in TLS-intercepting environments",
+    "No customer deliverable — CLI/GUI output JSON or screen only, nothing sellable",
+    "No sales or training collateral",
+    "No business records: no engagement, approval, deliverable or decision record",
+    "No enforceable owner approval gates"
+  ],
+  "skills": [
+    {"id": "product-readiness-check", "area": "Product Readiness", "path": "agents/skills/product-readiness-check/", "entry": "node agents/skills/product-readiness-check/run.mjs", "status": "implemented, tested 2026-10-04", "gates": []},
+    {"id": "footprint-report-producer", "area": "Digital Product Production", "path": "agents/skills/footprint-report-producer/", "entry": "scan.sh → produce.py", "status": "implemented, tested 2026-10-04 with a real scan", "gates": ["production (enforced)", "customer_communication (never crossed)"]},
+    {"id": "deck-builder", "area": "Digital Product Production", "path": "agents/skills/deck-builder/", "entry": "python3 agents/skills/deck-builder/build_deck.py <outline.json>", "status": "implemented, tested 2026-10-04", "gates": ["publication (never crossed)"]},
+    {"id": "business-records-ledger", "area": "Business Records", "path": "agents/skills/business-records-ledger/", "entry": "python3 agents/skills/business-records-ledger/ledger.py", "status": "implemented, tested incl. tamper detection 2026-10-04", "gates": ["records all four gates; refuses agent approvals"]}
+  ],
+  "agents": [
+    {"id": "readiness-agent", "path": "agents/agents/readiness-agent.md", "skills": ["product-readiness-check", "business-records-ledger:read+note"]},
+    {"id": "production-agent", "path": "agents/agents/production-agent.md", "skills": ["footprint-report-producer", "deck-builder", "business-records-ledger:append"]},
+    {"id": "records-agent", "path": "agents/agents/records-agent.md", "skills": ["business-records-ledger"]}
+  ],
+  "gates": ["production", "publication", "spending", "customer_communication"],
+  "background_operation": {"configured": false, "statement": "No scheduler, cron, webhook or worker is configured or claimed. All runs are human-invoked."},
+  "format_mapping": {
+    "Pages (task & decision record)": "agents/DECISION_RECORD.md + ledger decision records — Pages not reachable from this environment",
+    "Google Drive (working files)": "agents/workspace/ mirrors the intended Drive folder tree — Drive sync not configured",
+    "PDF (customer deliverables)": "footprint-report-producer (reportlab) — working",
+    "Presentations (sales/training decks)": "deck-builder (.pptx via python-pptx) — working; Google Slides import is a manual step"
+  },
+  "python_requirements": "agents/requirements.txt"
+}

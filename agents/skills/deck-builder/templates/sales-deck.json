@@ -1,0 +1,45 @@
+{
+  "title": "Digital Footprint Reports",
+  "subtitle": "Public-profile discovery for legal, HR-compliance and trust & safety teams",
+  "kind": "sales",
+  "author": "<Your business name>",
+  "footer": "Confidential — sales draft, not for distribution until owner publication approval",
+  "slides": [
+    {"title": "The problem", "bullets": [
+      "Identity questions stall cases, hires and investigations",
+      "Manual searching across 1,000+ sites is slow and inconsistent",
+      "Ad-hoc screenshots are not defensible evidence"],
+     "notes": "Open with the buyer's pain: time, consistency, defensibility."},
+    {"title": "What you receive", "bullets": [
+      "A PDF Digital Footprint Report per identifier (username, handle, e-mail pattern)",
+      "Detected profiles with confidence bands (High / Medium / Low)",
+      "Inconclusive & unreachable sites listed — nothing hidden",
+      "Method, limitations and lawful-use statement on every report"],
+     "notes": "Show the sample report. Emphasise transparency: failed checks are reported, not dropped."},
+    {"title": "How it works", "left": [
+      "1. Engagement opened with stated lawful purpose",
+      "2. Automated sweep (social-analyzer, 999 sites)",
+      "3. Analyst review of medium/low signals"],
+     "right": [
+      "4. Owner approves production",
+      "5. Report delivered as PDF",
+      "6. Full record retained (hash-chained ledger)"],
+     "notes": "Every step is recorded. Approval gates are human, not automated."},
+    {"title": "What it is not", "bullets": [
+      "Not a consumer report (FCRA) — no adverse-action use without your own legal basis",
+      "No account access, no private data, no scraping behind logins",
+      "Confidence ≠ identity: medium/low bands require corroboration"],
+     "notes": "Set expectations early; it protects both sides."},
+    {"section": "Packages & next steps"},
+    {"title": "Packages (placeholder — owner sets pricing)", "bullets": [
+      "Single identifier report",
+      "Multi-identifier correlation (up to 5)",
+      "Retainer: monthly volume with 48-hour turnaround"],
+     "notes": "PRICING IS A SPENDING/PUBLICATION DECISION — fill in only after owner approval."},
+    {"title": "Next step", "bullets": [
+      "Send one identifier under NDA for a sample DRAFT report",
+      "Review together; agree scope and purpose statement",
+      "Open engagement"],
+     "notes": "Close on the sample-report offer."}
+  ]
+}

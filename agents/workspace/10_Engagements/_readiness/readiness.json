@@ -1,0 +1,146 @@
+{
+  "product": "social-analyzer",
+  "version": "2.0.32",
+  "generated": "2026-10-04T14:52:32.127Z",
+  "node": "v22.22.3",
+  "verdict": "READY WITH CAVEATS",
+  "counts": {
+    "PASS": 14,
+    "WARN": 5
+  },
+  "results": [
+    {
+      "id": "node-version",
+      "area": "runtime",
+      "status": "PASS",
+      "detail": "node v22.22.3 satisfies engines >=20.18.1",
+      "remediation": ""
+    },
+    {
+      "id": "npm-deps",
+      "area": "runtime",
+      "status": "PASS",
+      "detail": "all 28 runtime dependencies resolvable",
+      "remediation": ""
+    },
+    {
+      "id": "data-sites.json",
+      "area": "data",
+      "status": "PASS",
+      "detail": "sites.json parses (999 entries)",
+      "remediation": ""
+    },
+    {
+      "id": "data-languages.json",
+      "area": "data",
+      "status": "PASS",
+      "detail": "languages.json parses (184 entries)",
+      "remediation": ""
+    },
+    {
+      "id": "data-names.json",
+      "area": "data",
+      "status": "PASS",
+      "detail": "names.json parses (50 entries)",
+      "remediation": ""
+    },
+    {
+      "id": "data-countries.json",
+      "area": "data",
+      "status": "PASS",
+      "detail": "countries.json parses (242 entries)",
+      "remediation": ""
+    },
+    {
+      "id": "data-dict.json",
+      "area": "data",
+      "status": "PASS",
+      "detail": "dict.json parses (3 entries)",
+      "remediation": ""
+    },
+    {
+      "id": "data-sites-drift",
+      "area": "data",
+      "status": "PASS",
+      "detail": "sites.json_new identical to sites.json",
+      "remediation": "Review pending detection updates before release."
+    },
+    {
+      "id": "cli-help",
+      "area": "cli",
+      "status": "PASS",
+      "detail": "node app.js --help prints usage",
+      "remediation": ""
+    },
+    {
+      "id": "py-cli-help",
+      "area": "cli",
+      "status": "PASS",
+      "detail": "python3 app.py -h prints usage",
+      "remediation": ""
+    },
+    {
+      "id": "tls-default",
+      "area": "network",
+      "status": "WARN",
+      "detail": "Node default CA fails (UNABLE_TO_VERIFY_LEAF_SIGNATURE); works with system bundle",
+      "remediation": "Run scans with NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt (TLS interception / corporate proxy environment)."
+    },
+    {
+      "id": "scan-smoke",
+      "area": "product",
+      "status": "PASS",
+      "detail": "fast scan detected 1 profile(s) for johndoe@github",
+      "remediation": ""
+    },
+    {
+      "id": "slow-scan-firefox",
+      "area": "optional",
+      "status": "WARN",
+      "detail": "firefox not installed — --mode slow (webdriver) unavailable",
+      "remediation": "apt-get install firefox-esr; or run via docker-compose grid."
+    },
+    {
+      "id": "slow-scan-geckodriver",
+      "area": "optional",
+      "status": "WARN",
+      "detail": "geckodriver binary missing (postinstall skipped/failed)",
+      "remediation": "npm rebuild geckodriver with working TLS to github.com."
+    },
+    {
+      "id": "ocr-tesseract",
+      "area": "optional",
+      "status": "WARN",
+      "detail": "tesseract not installed — OCR detection layer disabled",
+      "remediation": "apt-get install tesseract-ocr."
+    },
+    {
+      "id": "gui-start",
+      "area": "product",
+      "status": "PASS",
+      "detail": "GUI served /get_settings on :9005",
+      "remediation": ""
+    },
+    {
+      "id": "git-branch",
+      "area": "records",
+      "status": "PASS",
+      "detail": "on arena/01a10754-social-analyzer; 1 changed path(s)",
+      "remediation": ""
+    },
+    {
+      "id": "upstream-files-untouched",
+      "area": "records",
+      "status": "PASS",
+      "detail": "no upstream (non-agents/) files modified in working tree",
+      "remediation": "Keep product changes in reviewed commits; agents/ is the only fork-owned area."
+    },
+    {
+      "id": "ci-autocommit",
+      "area": "records",
+      "status": "WARN",
+      "detail": "upstream workflow auto-commits & pushes on every push (qeeqbox auto-checking.sh)",
+      "remediation": "This is upstream tooling, not an owner gate. Disable in fork settings or keep Actions off for this repo if you do not want unattended commits."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "detected": [
+    {
+      "link": "https://github.com/johndoe",
+      "rate": "%100.00",
+      "title": "johndoe \u00b7 GitHub"
+    }
+  ],
+  "failed": [
+    {
+      "link": "https://mobile.twitter.com/johndoe"
+    },
+    {
+      "link": "https://reddit.com/user/johndoe"
+    },
+    {
+      "link": "https://twittercommunity.com/u/johndoe"
+    }
+  ],
+  "_meta": {
+    "username": "johndoe",
+    "websites": "github reddit twitter",
+    "tool": "social-analyzer (node app.js, fast mode)",
+    "captured": "2026-10-04T14:47:14+00:00"
+  }
+}

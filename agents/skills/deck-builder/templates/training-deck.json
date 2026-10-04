@@ -1,0 +1,44 @@
+{
+  "title": "Analyst Training — Producing a Digital Footprint Report",
+  "subtitle": "Internal onboarding for the social-analyzer reporting workflow",
+  "kind": "training",
+  "author": "<Your business name>",
+  "footer": "Internal training material — draft",
+  "slides": [
+    {"title": "Learning objectives", "bullets": [
+      "Run product-readiness-check and read its verdict",
+      "Open an engagement and run a scan with scan.sh",
+      "Produce a DRAFT report, request owner approval, produce FINAL",
+      "Never bypass a gate: production, publication, spending, customer_communication"]},
+    {"title": "Step 1 — Readiness", "bullets": [
+      "node agents/skills/product-readiness-check/run.mjs",
+      "READY / READY WITH CAVEATS → proceed; NOT READY → stop and escalate",
+      ["Common caveat: NODE_EXTRA_CA_CERTS on proxied networks", "Common caveat: firefox/tesseract missing → fast mode only"]],
+     "notes": "Show the readiness.md table. Explain WARN vs FAIL."},
+    {"title": "Step 2 — Open the engagement", "bullets": [
+      "ledger.py add engagement --actor owner:<name> -f customer=… -f subject=… -f purpose=…",
+      "Purpose must be a lawful purpose stated by the customer",
+      "Copy the eng-… id; everything else references it"]},
+    {"title": "Step 3 — Scan", "bullets": [
+      "agents/skills/footprint-report-producer/scan.sh <eng-id> <username> \"<sites|all>\"",
+      "Uses the existing app.js — do not modify detection logic",
+      "Output: 10_Engagements/<eng-id>/scan-<username>.json"]},
+    {"title": "Step 4 — Draft, approve, final", "left": [
+      "produce.py → DRAFT (watermarked)",
+      "Review medium/low bands manually",
+      "Ask owner to approve production"],
+     "right": [
+      "ledger.py approve <eng> production --actor owner:<name>",
+      "produce.py again → FINAL in outbox/",
+      "Delivery = separate customer_communication gate"]},
+    {"title": "Rules you must not break", "bullets": [
+      "Agents cannot record approvals (ledger refuses agent:/bot: actors)",
+      "No FINAL without production approval",
+      "No sending, posting or paying from any skill",
+      "Verify the ledger weekly: ledger.py verify"]},
+    {"title": "Exercise", "bullets": [
+      "Run the full flow for identifier 'johndoe' on sites 'github reddit'",
+      "Expected: 1 detected (github, 100%), reddit unreachable in fast mode",
+      "Submit the DRAFT path and ledger record id"]}
+  ]
+}

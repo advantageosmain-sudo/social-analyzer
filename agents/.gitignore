@@ -1,0 +1,8 @@
+# Working files mirror Drive; keep structure + records, not bulk outputs
+workspace/10_Engagements/eng-*/
+workspace/20_Deliverables/*
+workspace/40_Sales_Training/*.pptx
+workspace/00_Inbox/*
+workspace/90_Archive/*
+!workspace/**/.gitkeep
+__pycache__/
